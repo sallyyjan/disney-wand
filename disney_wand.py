@@ -32,6 +32,7 @@ paintColors = [[51, 153, 255],
 # location and colour of paint
 # [x , y , colorId ] 
 myPoints = []  
+imgResult = None
 
 def detectWand(img, wandColors, paintColors):
     """return coordinates and color of each wand drawing"""
