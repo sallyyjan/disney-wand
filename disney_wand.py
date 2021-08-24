@@ -29,3 +29,35 @@ paintColors = [[51, 153, 255],
                  [0, 255, 0],           
                  [255, 0, 0],]
 
+# location and colour of paint
+# [x , y , colorId ] 
+myPoints = []  
+
+def detectWand(img, wandColors, paintColors):
+    """return coordinates and color of each wand drawing"""
+
+    # concerting BGR/RBG img to HSV format
+    imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+    wandCount = 0
+    newPoints = []
+
+    # get paint coordinates and color for each wand detected
+    for color in wandColors:
+        lower = color[0]
+        upper = color[1]
+        mask = cv2.inRange(imgHSV, lower, upper) # the binary image
+        x, y = getContours(mask) 
+
+        # making the paint circles
+        cv2.circle(imgResult, center=(x,y), radius=15, 
+                    color=paintColors[wandCount], thickness=cv2.FILLED)
+        if x != 0 and y != 0:
+            newPoints.append([x,y,wandCount])
+        
+        count += 1
+    
+    return newPoints
+
+def getContours():
+    pass
