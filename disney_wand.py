@@ -16,4 +16,10 @@ vid.set(cv2.CAP_PROP_FRAME_HEIGHT, framHeight)
 # set image brightness
 vid.set(cv2.CAP_PROP_BRIGHTNESS, brightness)
 
-# 
+# color range to detect the wand
+# format [low],[high] as HSV values
+wandColors = [[[5, 107, 0], [19, 255, 255]],
+            [[133, 56, 0], [159, 156, 255]],
+            [[57, 76, 0], [100, 255, 255]],
+            [[90, 48, 0], [118, 255, 255]]] # could possibly be tuples?
+
