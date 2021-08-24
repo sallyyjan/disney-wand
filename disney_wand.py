@@ -55,7 +55,7 @@ def detectWand(img, wandColors, paintColors):
         if x != 0 and y != 0:
             newPoints.append([x,y,wandCount])
         
-        count += 1
+        wandCount += 1
     
     return newPoints
 
