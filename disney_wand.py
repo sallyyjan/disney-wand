@@ -62,7 +62,7 @@ def detectWand(img, wandColors, paintColors):
     return newPoints
 
 def getContours(img):
-    """contours function with improved accuracy"""
+    """contours function with improved accuracy to get coordinate of wand point"""
     # mode: gets only exrteme outer contours
     # method: stores all contour points
     _, contours, hierarchy = cv2.findContours(img, mode=cv2.RETR_EXTERNAL,
@@ -84,3 +84,4 @@ def getContours(img):
             
             x, y, w, h = cv2.boundingRect(approxCurve)
     return x + (w // 2), y
+
