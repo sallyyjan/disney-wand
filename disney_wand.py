@@ -94,4 +94,7 @@ def drawOnCanvas(myPoints, paintColors):
 
 
 while True:
-    
+    success, img = vid.read()
+    imgResult = img.copy()
+
+    newPoints = detectWand
