@@ -45,8 +45,8 @@ def detectWand(img, wandColors, paintColors):
 
     # get paint coordinates and color for each wand detected
     for color in wandColors:
-        lower = color[0]
-        upper = color[1]
+        lower = np.array(color[0])
+        upper = np.array(color[1])
         mask = cv2.inRange(imgHSV, lower, upper) # the binary image
         
         # get coordinates of wand
