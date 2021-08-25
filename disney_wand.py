@@ -76,7 +76,7 @@ def getContours(img):
         area = cv2.contourArea(cnt)
         if area > 500:
             # assumes cnt with area > 500 is closed contour 
-            perimeter = cv2.arclength(cnt, True)
+            perimeter = cv2.arcLength(cnt, True)
 
             # approximate polygonal curve of cnt
             # set max difference between original and approxCurve as 
