@@ -48,17 +48,39 @@ def detectWand(img, wandColors, paintColors):
         lower = color[0]
         upper = color[1]
         mask = cv2.inRange(imgHSV, lower, upper) # the binary image
+        
+        # get coordinates of wand
         x, y = getContours(mask) 
 
         # making the paint circles
         cv2.circle(imgResult, center=(x,y), radius=15, 
                     color=paintColors[wandCount], thickness=cv2.FILLED)
+        
         if x != 0 and y != 0:
             newPoints.append([x,y,wandCount])
-        
         wandCount += 1
-    
     return newPoints
 
-def getContours():
-    pass
+def getContours(img):
+    """contours function with improved accuracy"""
+    # mode: gets only exrteme outer contours
+    # method: stores all contour points
+    _, contours, hierarchy = cv2.findContours(img, mode=cv2.RETR_EXTERNAL,
+                                                method=cv2.CHAIN_APPROX_NONE)
+    
+    x, y, w, h = 0, 0, 0, 0
+
+    # improving accuracy of contours
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        if area > 500:
+            # assumes cnt with area > 500 is closed contour 
+            perimeter = cv2.arclength(cnt, True)
+
+            # approximate polygonal curve of cnt
+            # set max difference between original and approxCurve as 
+            # 0.02 * perimeter
+            approxCurve = cv2.approxPolyDP(cnt, 0.02 * perimeter, closed=True)
+            
+            x, y, w, h = cv2.boundingRect(approxCurve)
+    return x + (w // 2), y
