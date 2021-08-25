@@ -53,6 +53,7 @@ def detectWand(img, wandColors, paintColors):
         x, y = getContours(mask) 
 
         # making the paint circles
+        # TODO: check whether this is needed (same as drawOnCanvas)
         cv2.circle(imgResult, center=(x,y), radius=15, 
                     color=paintColors[wandCount], thickness=cv2.FILLED)
         
@@ -97,4 +98,3 @@ while True:
     success, img = vid.read()
     imgResult = img.copy()
 
-    newPoints = detectWand
