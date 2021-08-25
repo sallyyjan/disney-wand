@@ -83,5 +83,15 @@ def getContours(img):
             approxCurve = cv2.approxPolyDP(cnt, 0.02 * perimeter, closed=True)
             
             x, y, w, h = cv2.boundingRect(approxCurve)
+    # wand point is is center-left tip
     return x + (w // 2), y
 
+def drawOnCanvas(myPoints, paintColors):
+    """draws wand action on virtual canvas"""
+    for point in myPoints:
+        cv2.circle(imgResult, center=(point[0], point[1]), radius=10, 
+                    color=paintColors[point[2]], thickness=cv2.FILLED)
+
+
+while True:
+    
