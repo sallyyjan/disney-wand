@@ -98,3 +98,17 @@ while True:
     success, img = vid.read()
     imgResult = img.copy()
 
+    newPoints = detectWand(img, wandColors, paintColors)
+
+    # TODO: why need to copy then check length again?
+    if len(newPoints) != 0:
+        for newPoint in newPoints:
+            myPoints.append(newPoint)
+    if len(myPoints) != 0:
+        drawOnCanvas(myPoints, paintColors)
+
+    # display output on screen
+    cv2.imshow("Result", imgResult)
+
+    if cv2.waitKey(1) and 0xFF == ord('q'):
+        break
