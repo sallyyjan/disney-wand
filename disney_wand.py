@@ -66,7 +66,7 @@ def getContours(img):
     """contours function with improved accuracy to get coordinate of wand point"""
     # mode: gets only exrteme outer contours
     # method: stores all contour points
-    _, contours, hierarchy = cv2.findContours(img, mode=cv2.RETR_EXTERNAL,
+    contours, hierarchy = cv2.findContours(img, mode=cv2.RETR_EXTERNAL,
                                                 method=cv2.CHAIN_APPROX_NONE)
     
     x, y, w, h = 0, 0, 0, 0
